@@ -192,6 +192,9 @@ def process_sequence(sequence: str, options: Dict[str, Any]) -> Dict[str, Any]:
     # if seq_id:
     #     result["closest_match"] = {"id": seq_id, "date": date, "similarity": float(similarity_db)}
     
+    seq_id, date, similarity_db = _find_closest_in_db(seq)
+    print(f"[DB MATCH] id={seq_id}, date={date}, sim={similarity_db}")
+
     # With this:
     if seq_id is not None:
         result["closest_match"] = {
