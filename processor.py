@@ -110,7 +110,7 @@ def _plot_score_colorbar(score_pos: float, uncertainty_pct: float = 0.0) -> str:
     norm = mpl.colors.Normalize(vmin=0, vmax=230)
 
     cb = mpl.colorbar.ColorbarBase(ax, cmap=cmap, norm=norm, orientation='horizontal')
-    cb.set_label("FLEVO Escape Score")
+    cb.set_label("EscaPRRS-ORF5 score")
 
     point_position = (score_pos - 0) / (maximum - 0)
     point_position = max(0.0, min(1.0, point_position))
