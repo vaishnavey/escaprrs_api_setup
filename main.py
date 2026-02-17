@@ -77,8 +77,14 @@ def startup_event():
     t.start()
 
 @app.get("/health")
+
 def health():
-    return {"status": "ok", "repo": REPO_ID, "processor_loaded": bool(USER_PROCESSOR)}
+    return {
+        "status": "ok",
+        "version": API_VERSION,
+        "processor_has_closest_match_always": True  
+    }
+
 
 @app.post("/analyze")
 async def analyze(req: AnalyzeRequest, x_api_key: Optional[str] = Header(None)):
