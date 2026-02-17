@@ -188,7 +188,24 @@ def process_sequence(sequence: str, options: Dict[str, Any]) -> Dict[str, Any]:
         "plots": [{"name": "escape_score", "b64": plot_b64}],
     }
 
-    if seq_id:
-        result["closest_match"] = {"id": seq_id, "date": date, "similarity": float(similarity_db)}
-
-    return result
+    # Replace this:
+    # if seq_id:
+    #     result["closest_match"] = {"id": seq_id, "date": date, "similarity": float(similarity_db)}
+    
+    # With this:
+    if seq_id is not None:
+        result["closest_match"] = {
+            "id": seq_id,
+            "date": date,
+            "similarity": float(similarity_db),
+            "source": "database.fasta"
+        }
+    else:
+        db_path = os.path.join(BASE_DIR, "database.fasta")
+        reason = "database.fasta not found" if not os.path.exists(db_path) else "no valid sequences in database.fasta"
+        result["closest_match"] = {
+            "id": None,
+            "date": None,
+            "similarity": None,
+            "reason": reason
+        }
